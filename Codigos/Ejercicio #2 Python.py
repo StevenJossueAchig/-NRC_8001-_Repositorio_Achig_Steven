@@ -105,18 +105,18 @@ def pedirLongitudes():
 
 def mostrar_menu():
     """
-    Funcion para validar el ingreso de los numeros de los elementos
+    Funcion para mostrar un menu de opciones para salir o pedir las longitudes
     Recibe:
-        numero: es el numero de elementos debe ser un entero
+        No recibe parametros
     Retorna:
-        verdadero o falso dependiendo de si es o no un numero entero
+        No retorna 
     """
     #Generamos una variable para almacenar la opcion
     opcion = ""
     #mientras la opcion sea diferente de 2
     while opcion != "0":
         #menu se ejcutara
-        print("Escoja una opcion:\n\n")
+        print("Escoja una opcion:")
         menu = """
             0. Salir
             1. Pedir dos longitudes

@@ -1,5 +1,5 @@
 """
-Preguntar al usuario por el número de horas trabajadas y el coste por hora.
+Hallar el área de un trapezoide.
 
 Autor:
 Achig Toapanta Steven Jossue
@@ -89,7 +89,7 @@ def mostrar_menu():
         print("Escoja una opcion:")
         menu = """
             0. Salir
-            1. Preguntar
+            1. Calcular el área de un trapezoide
         """
         #opcion es igual a la entrada que debemos a menu
         opcion = input(menu)
