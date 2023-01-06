@@ -29,9 +29,9 @@ def validarNumero(numero):
             #se retorna true porque el ciclo debe seguir
             return False;
         
-def preguntar():
+def calcularArea():
     """
-    Funcion para solicitar el numero de horas trabajadas, el coste por hora y la moneda en que cobra.
+    Funcion para solicitar las bases de un trapezoide y su altura para calcular su area
     Recibe:
         No recibe parametros
     Retorna:
@@ -41,23 +41,28 @@ def preguntar():
     sigue = True
     #mientras la variable sigue sea verdadera
     while sigue == True:
-        #definimos la variable HorasTrab para el valor de las horas trabajadas de una persona
-        HorasTrab = input("\n\nIngrese el numero de horas trabajadas: ")
-        #Definimos la variable CosteHora para almacenar el valor del costo por hora de una persona
-        CosteHora = input("Ingrese el coste por hora: ")
-        #Si validar numero es verdadero
-        if validarNumero(HorasTrab)==True & validarNumero(CosteHora)==True:
+        #definimos la variable baseA para la base mayor
+        baseA = input("\n\nIngrese el valor de la base mayor: ")
+        #Definimos la variable baseB para la base menor
+        baseB = input("Ingrese el valor de la base menor: ")
+        #definimos la variable altura para 
+        altura = input("\n\nIngrese la altura del trapezoide: ")
+        #Si validar que las variables sean solo numeros
+        if validarNumero(baseA)==True & validarNumero(baseB)==True & validarNumero(altura)==True:
             #HorasTrab y CosteHora se asigna como float
-            HorasTrab = float(HorasTrab);
-            CosteHora = float(CosteHora);
+            baseA = float(baseA);
+            baseB = float(baseB);
+            altura = float(altura);
             #si numero es menor o igual a cero 
-            if HorasTrab <= 0 or CosteHora <= 0:
+            if baseA <= 0 or baseB <= 0 or altura<= 0:
                 #imprimir el numero es invalido debe ser mayor a cero
                 print("\n\nNUMERO INVALIDO", "\nComprueba que el numero ingresado sea mayor que cero")
                 #el bucle sigue
                 sigue = True
             #si no
             else:
+                #calculamos el area
+                area = (baseA+baseB)*(altura)/2
                 #el bucle se rompe
                 sigue = False
         #Si no
@@ -66,11 +71,8 @@ def preguntar():
             print("\n\nINGRESE SOLO NUMEROS POR FAVOR INTENTA DE NUEVO\n")
             #el bucle sigue
             sigue = True
-    #Definimos la variable moneda para saber en que moneda se cobra el tiempo trabajado
-    Moneda = input("Ingrese la moneda en que gana: ")
     #se imprimen los datos con un mensaje
-    print("\n\nLas horas trabajadas son: ", HorasTrab, "horas")
-    print("El costo por hora es: ", CosteHora, " ", Moneda)
+    print("\n\nEl area del trapezoide es: ", area, "Unidades^2")
 
 #Funcion menu para hacer el llamado las funciones preguntar
 def mostrar_menu():
@@ -95,8 +97,8 @@ def mostrar_menu():
         opcion = input(menu)
         #si la opcion es 1
         if opcion == "1":
-            print("Preguntar al usuario por el número de horas trabajadas y el coste por hora.")
-            preguntar()
+            print("Calcular el área de un trapezoide.")
+            calcularArea()
         #sino saldra del menu y finalizara todo
         elif opcion == "2":
             return
