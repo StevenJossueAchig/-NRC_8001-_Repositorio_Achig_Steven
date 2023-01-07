@@ -144,11 +144,7 @@ def mostrar_menu():
             calcularHipotenusa()
         if opcion == "2":
             print("Calcular Un cateto.")
-            calcularCateto()
-        #sino saldra del menu y finalizara todo
-        elif opcion == "2":
-            return
-        
+            calcularCateto() 
 
 #Se hace llamado a la funcion main delimitando el main.
 if __name__ == '__main__':
