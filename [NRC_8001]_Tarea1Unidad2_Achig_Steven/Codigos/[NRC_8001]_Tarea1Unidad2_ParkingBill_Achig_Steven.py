@@ -10,9 +10,18 @@ Achig Toapanta Steven Jossue
 Verisión:
 VER.1.3
 """
+
 """
 x = lambda a: a + 10
 print (x(5))
+
+def myfunc(x):
+    TOdo lo que se hace en la funcion
+    return x + 10
+
+muestra = lambda example: 13, 15, 16, 45
+best, others = big_o.big_o(calcularFactura, muestra)
+print(best)
 
 x = lambda a, b: a * b
 print(x(5, 6))
@@ -149,7 +158,7 @@ def ingreso():
                     #se llama a la funcion calcularFactura
                     calcularFactura(horaEntrada, minutoEntrada, horaSalida, minutoSalida)
                     #se cambia el valor de repetir a falso para salir del ciclo
-                    repetir == False
+                    repetir = False
                 #si la hora de entrada es mayor que la hora de salida
                 else:
                     #se imprime el mensaje
@@ -164,6 +173,41 @@ def ingreso():
                 repetir = True
 
 
+#Funcion menu para hacer el llamado las funciones preguntar
+def mostrar_menu():
+    """
+    Funcion para mostrar un menu de opciones para salir o usar el programa
+    Recibe:
+        No recibe parametros
+    Retorna:
+        No retorna 
+    """
+    #Generamos una variable para almacenar la opcion
+    opcion = ""
+    #mientras la opcion sea diferente de 2
+    while opcion != "0":
+        #menu se ejcutara
+        print("\nEscoja una opcion:")
+        menu = """
+            0. Salir
+            1. Calcular Factura
+            2. Calcular complejidad
+        """
+        #opcion es igual a la entrada que debemos a menu
+        opcion = input(menu)
+        #si la opcion es 1
+        if opcion == "1":
+            print("Calcular Factura")
+            #hacemos la llamada a la variable ingreso
+            ingreso()
+        #si la opcion es 2
+        elif opcion == "2":
+            muestra = lambda a, b, c, d: 14, 15, 16 , 17
+            best, others = big_o.big_o(calcularFactura, muestra)
+            print(best) 
+
 #Se hace llamado a la funcion main delimitando el main.
 if __name__ == '__main__':
-    ingreso()
+    mostrar_menu()
+    
+    
