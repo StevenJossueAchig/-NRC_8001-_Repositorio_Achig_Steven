@@ -1,4 +1,4 @@
-import big_o
+#import big_o
 import math
 
 """
@@ -67,7 +67,7 @@ def ingreso():
             ("\nIngrese solo numeros")
             #regresamos la bucle
             repetir = True
-
+@profile
 def encontrarPotencia(numero):
     """
         Funcion para encontrar la potencia, 
@@ -86,7 +86,7 @@ def encontrarPotencia(numero):
     #y se imprime el exponente restado 1
     print(("\nLa mayor potencia de 2 es: "),exponente-1, ("es decir (2^"), exponente-1, (") "))
 
-@profile
+
 #Funcion menu para hacer el llamado las funciones preguntar
 def mostrar_menu():
     """
@@ -117,9 +117,10 @@ def mostrar_menu():
             encontrarPotencia(numero)
         #si la opcion es 2
         elif opcion == "2":
-            muestra = lambda example: 26
-            best, others = big_o.big_o(encontrarPotencia, muestra)
-            print(best)
+            print("complejidad")
+            #muestra = lambda example: 26
+            #best, others = big_o.big_o(encontrarPotencia, muestra)
+            #print(best)
 
 
 #Se hace llamado a la funcion main delimitando el main.
