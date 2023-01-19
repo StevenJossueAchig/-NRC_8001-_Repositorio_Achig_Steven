@@ -86,7 +86,7 @@ def encontrarPotencia(numero):
     #y se imprime el exponente restado 1
     print(("\nLa mayor potencia de 2 es: "),exponente-1, ("es decir (2^"), exponente-1, (") "))
 
-@profile
+#@profile
 #Funcion menu para hacer el llamado las funciones preguntar
 def mostrar_menu():
     """
