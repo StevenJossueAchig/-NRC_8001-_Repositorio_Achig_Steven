@@ -264,117 +264,232 @@ class HardwareStore:
         Retorna:
             no retorna
         """
+        #inicializamos a la variable existe producto como falsa
         existProduct = False
+        #imprimios el tipo de busqueda que quiera realizar
         print("\nEscoja el tipo de busqueda que desea realizar\n")
+        #opcion 1 por nombre
         print("1: Por nombre")
+        #opcion 2 por ID
         print("2: Por ID")
+        #uso de try para una excepcion
         try:
+            #opcion de busqueda para ingresar con que se quiere buscar el producto
             opciondeBusqueda = int(input("Ingrese el número de la opción de busqueda deseada:"))
+            #si la opcion de busqueda es por nombre
             if opciondeBusqueda == 1:
+                #Pedimos el ingreso del nombre a buscar
                 nombreProducto = input("Ingrese el nombre del producto que desea buscar:")
+                #para un producto en la lista de productos
                 for product in self.products:
                     #Pintura, pintura
                     #produc.name.lower() = Pintura = pintura
                     #produc.name.upper() = Pintura = PINTURA
+                    #si el nombre del producto transformado a minusculas es igual al nombre de uno de los elementos igual transformado a minusculas
                     if product.name.lower() == nombreProducto.lower():
+                        #imprimos que el producto ha sido encontrado
                         print("\nProducto encontrado.\n")
+                        #y llamamaos a la funcion imprimir producto
                         self.printProduct(product=product)
+                        #y la existencia del prodcuto pasa a ser verdadera
                         existProduct = True
-        
+            #Si en cambio la opcion de busqueda es por el ID
             elif opciondeBusqueda == 2:
+                #se solicita el ID que se quiera buscar
                 idProducto = int(input("Ingrese el ID del producto que desea buscar:"))
+                #se realiza nuevamente la busqueda como en el anterior caso pero ahora con el ID
                 for product in self.products:
+                    #si el ID es igual al ID de algun producto 
                     if product.ID == idProducto:
+                        #se muestra que el producto ha sido encontrado
                         print("\nProducto encontrado.\n")
+                        #se llama a la funcion imprimir producto y se le envia el producto a imprimir
                         self.printProduct(product=product)
+                        #la existencia del prodcuto cambia a verdadera
                         existProduct = True
-    
+            #si el producto no existe
             if not existProduct:
+                #se muestra un mensaje de producto no encontrado
                 print("Producto no encontrado.\n")
-
+        #si se ingresa una opcion incorrecta
         except:
+            #se imprime que la opcion ingresada no ha sido correcta
             print("Ingrese una opción correcta.\n")
 
     def loadProducts(self):
+        """
+        Funcion para cargar los productos del documento de texto
+        Recibe:
+            self = clase producto, un objeto
+        Retorna:
+            no retorna
+        """
+        #en una variable line_list cargamos la funcion de cargar objetos de un archivo enviamos el nombre del archivo
         line_list = Utils.loadObjectsFromFile(filename="products.txt")
+        #par una linea en el arreglo line_list
         for line in line_list:
+            #separamos las palabras que esten igresadas con la llave siendo una coma
             line = line.split(",")
-
+            #su el producto existe en el archivo
             if not self.checkIsProductExistInList(line[0]):
+                #asignamos cada dato a cada posicion del arreglo
                 product = Product(name=line[0], stock= int(line[1]), price=float(line[2]), expirationDate=line[3],description=line[4])
+                #y en la clase productos agregamos cada producto para cargarlos en memeoria
                 self.products.append(product)
-
+        #demostramos que la carga ha sido exitosa
         print("\n¡Productos cargados desde txt exitosamente.!\n")
     
 class Utils:
+    """
+        Clase utils para el manejo de un archivo txt
+        atributos:
+            
+        metodos:
+            sabeObjectsOnfile = guarda texto en el archivo
+            loadObjectsFromFile = carga el texto del archivo
+    """
     def saveObjectsOnFile(filename,line):
         """
+        Funcion para guardar los objetos en un archivo de texto
+        Recibe:
+            filename = nombre del archivo de texto
+            line = el texto a guardar
+        Retorna:
+            lines = lineas con el texto del documento
         r = solo lectura
         w = solo escritura (sobreescribe totalmente el archivo)
         a = agregación al final del archivo
         r+ = leer y escribir
         """
+        #abirmos el archivo
         file = open(filename,"a")
+        #escribimos en el archivo el texto enviado
         file.write(line)
+        #cerramos el archivo
         file.close()
 
     def loadObjectsFromFile(filename):
+        """
+        Funcion para cargar los objetos de un archivo de texto
+        Recibe:
+            filename = nombre del archivo de texto
+        Retorna:
+            lines = lineas con el texto del documento
+        """
+        #abrimos el archivo
         file = open(filename,"r")
+        #leemos el archivo
         lines = file.readlines()
+        #cerramos el archivo
         file.close()
+        #retornamos las lineas almancenas despues de la lectura
         return lines
 
-
-
 def menu():
+    """
+        Funcion para mostrar el menu
+        Recibe:
+            no recibe
+        Retorna:
+            option = a la option que el usuario escoga
+    """ 
+    #se imprime cada una de las opciones que puede ecoger
     print("\nEscoja un número del menú:\n")
+    #el caso 1 para cargar productos
     print("1: Cargar Productos")
+    #el caso 2 para vender productos
     print("2: Vender Producto")
+    #el caso 3 para agregar un producto
     print("3: Agregar Producto")
+    #el caso 4 para listar los productos
     print("4: Listar Productos")
+    #el caso 5 para buscar los productos
     print("5: Buscar Productos")
+    #el caso 6 para ver las ganancias
     print("6: Ver ganancias")
+    #el casos 7 para salir
     print("7: Salir")
+    #se solicita la opcion y se almacena en option
     option = input("Escriba el número y presione enter...")
+    #se retorna la opcion
     return option
 
 def executeOptionFromMenu(option, hardwareStore):
+    """
+        Funcion para hacer el llamado de las funciones
+        Recibe:
+            option = opcion escogida por el usuario
+            hardwarstore = objeto de tipo ferreteria
+        Retorna:
+            No retorna 
+    """ 
+    #si la opcion 1
     if option == 1:
+        #hacemos el llamado a la funcion de la ferreteria de cargar productos
         hardwareStore.loadProducts()
+    #si la opcion es 2
     elif option == 2:
+        #hacemos el llamado a la funcion de la ferreteria para vender un producto
         hardwareStore.sellProduct()
+    #si la opcion es igual a 3
     elif option == 3:
+        #hacemos el llamado a la funcion de la ferreteria para añadir un producto
         hardwareStore.addProduct()
+    #si la ocion es igual a 4
     elif option == 4:
+        #hacemos el llamado a la funcion de la ferreteria para listar los productos
         hardwareStore.listProducts()
+    #si la opcion es igual a 5
     elif option == 5:
+        #hacemos el llamado a la funcion de la ferreteria para buscar un producto 
         hardwareStore.searchProduct()
+    #si la opcion es igual a 6
     elif option == 6:
+        #hacemos el llamado a la funcion de la ferreteria para ver las ganancias
         hardwareStore.listEarns()
+    #si la opcion es igual a 7
     elif option == 7:
+        #salimos
         exit()
     else:
         executeOptionFromMenu(option=menu(), hardwareStore = hardwareStore)
 
 #if __name__ == "__main__": se inicializa el codigo desde esta linea (main)
 if __name__ == "__main__":
+    """
+        Funcion usar el menu
+        Recibe:
+            No recibe
+        Retorna:
+            No retorna 
+    """ 
+    #imprimir una bienvenida al sistema
     print("\n¡Bienvenido al sistema de gestión de venta de productos!\n")
-
+    #instancia de la clase ferreteria enviando el nombre
     hardwareStore = HardwareStore(name="Ferreteria Popular")
-    #option = menu()
-
+    #variable para seguir mientras es verdadera
     loop = True
+    #mientras lopp sea vedadero
     while(loop):
+        #try para cpaturar la opcion del menu sea un entero
         try:
+            #opcion como entero
             option=int(menu())
+        #excepcion
         except:
+            #option None
             option = None
+            #imprimir que se ha seleccionado una opcion erroena
             print("\n¡Se ha seleccionado una opción que no existe.!\n")
-
+        #si la opcion es diferente de none
         if option != None:
+            #hacemos el llamado a la funcion para ejecutra el menu mandamos el objeto ferreteria y la opcion
             executeOptionFromMenu(option, hardwareStore=hardwareStore)
+            #si la opcion es igual a 7
             if option == 7:
                 #exit()
                 #loop = False
+                #se imprime un adios
                 print("Adios\n")
+                #se rompe el bucle
                 break
