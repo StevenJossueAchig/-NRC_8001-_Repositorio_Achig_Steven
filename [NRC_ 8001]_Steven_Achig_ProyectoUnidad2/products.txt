@@ -1,0 +1,3 @@
+Pintura,40,23.89,25/03/2023,Puntura color blanco marca Pintuco
+Martillo,100,12.80,no aplica,martillo marca Stanley de metal
+Enchufe,100,0.50,no aplica,enchufe de 3 patas marca QBYCemento,15,10.75,30/11/2023,Quintal de cemento Holcim

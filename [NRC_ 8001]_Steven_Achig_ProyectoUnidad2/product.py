@@ -2,6 +2,8 @@
 #Componentes abreviaturas claves: def, __init__, self
 #En todos los metodos, tiene que tener como arg el self (primero)
 import random
+import os
+from tabulate import tabulate
 
 class Product:
     """
@@ -156,54 +158,38 @@ class HardwareStore:
             no retorna
         """
         #definimos una variable data para el ingreso de los datos del objeto producto, que estaran en un formato separado por ";"
-        data = input("\nIngrese los datos del producto en el siguiente formato: (Nombre; Cantidad; Precio; Fecha de Caducidad; Descripción) separados por punto y coma ';'"+"\n")
-        #se realizara una division a la variable data con el split y la llave sera el punto y coma
-        data = data.split(";")
+        name = input("Ingrese el nombre del producto: ")
+        stock = input("Ingrese la cantidad del producto: ")
+        price = input("Ingrese el precio del producto: ")
+        expirationDate = input("Ingrese la fecha de caducidad del producto: ")
+        description = input("Ingrese la descripcion del producto: ")
         #color blanco, pintuco, 2L
-        #controlar que el tamaño de la cadena sea de 5, [0,1,2,3,4]
-        #si el tamanio de la variable data es de 5 elementos
-        if len(data) == 5:
-            #asignamos el elemento cero de la data a una variable nombre
-            name = data[0]
-            #asignamos el elemento uno de la data a una variable stock
-            stock = data[1]
-            #asignamos el elemento dos de la data a una variable price
-            price = data[2]
-            #asignamos el elemento tres de la data a una variable fecha de expiracion
-            expirationDate = data[3]
-            #asignamos el elemento cuatro de la data a una variable descripcion
-            description = data[4]
-            #Enviamos al constructor de la clase producto los parametros propios de el, de cada elemento ingresado
-            product = Product(name=name, stock= stock, price=price, expirationDate=expirationDate,description=description)
-
-            #Variables booleanas del tipo bandera
-            validProduct = True
-            #hacemos el llamado a la validacion del formato de numero en el stock si no es valido
-            if not product.validateStockFormatNumber():
-                #entonces el producto valido es falso
-                validProduct = False
-            # o si el precio no es valido no es decimal
-            if not product.validatePriceFormatNumberDecimal():
-                #el producto no es valido
-                validProduct = False
-            #si el prodcuto es valido y el producto agregado no existe ya en la lista de prodcutos enviando su nombre
-            if validProduct and not self.checkIsProductExistInList(name):
-                #agregamos el producto a la lista de productos
-                self.products.append(product)
-                #variable linea asignada con todos los datos ingresados se concatenan para formar una sola cadena de caracteres separada por comas
-                line = name+","+stock+","+price+","+expirationDate+","+description+"\n"
-                #usamos la clase utils para ingresar el producto en un archivo de texto
-                Utils.saveObjectsOnFile(filename="products.txt",line=line) 
-                #imprimimos que el producto ha sido agregado correctamente
-                print("\n¡Producto agregado correctamente.!\n")
-            #si el producto ya existe
-            else:
-                #se imprime que el producto ingresado ya existe
-                print("\n¡El producto que desea ingresar ya existe.!\n")
-        #si el formato de la data no es el correcto
+        #Enviamos al constructor de la clase producto los parametros propios de el, de cada elemento ingresado
+        product = Product(name=name, stock= stock, price=price, expirationDate=expirationDate,description=description)
+        #Variables booleanas del tipo bandera
+        validProduct = True
+        #hacemos el llamado a la validacion del formato de numero enf el stock si no es valido
+        if not product.validateStockFormatNumber():
+            #entonces el producto valido es falso
+            validProduct = False
+        # o si el precio no es valido no es decimal
+        if not product.validatePriceFormatNumberDecimal():
+            #el producto no es valido
+            validProduct = False
+        #si el prodcuto es valido y el producto agregado no existe ya en la lista de prodcutos enviando su nombre
+        if validProduct and not self.checkIsProductExistInList(name):
+            #agregamos el producto a la lista de productos
+            self.products.append(product)
+            #variable linea asignada con todos los datos ingresados se concatenan para formar una sola cadena de caracteres separada por comas
+            line = name+","+stock+","+price+","+expirationDate+","+description+"\n"
+            #usamos la clase utils para ingresar el producto en un archivo de texto
+            Utils.saveObjectsOnFile(filename="products.txt",line=line) 
+            #imprimimos que el producto ha sido agregado correctamente
+            print("\n¡Producto agregado correctamente.!\n")
+        #si el producto ya existe
         else:
-            #se imprime que el ingreso no es el formato correcto
-            print("\n¡Ingrese los datos del producto en el formato correcto.!\n")
+            #se imprime que el producto ingresado ya existe
+            print("\n¡El producto que desea ingresar ya existe.!\n")
 
     def listProducts(self):
         """
@@ -253,8 +239,13 @@ class HardwareStore:
         Retorna:
             no retorna
         """
+        print("---------------------------------------------------------------------------------------------")
+        #definimos una variable d usando el formato de tabulate para imprimir el producto
+        d = [ [str(product.ID), product.name, str(product.stock), str(product.price), product.expirationDate, product.description]]
         #imprimimos el producto
-        print("ID: "+str(product.ID)+"\nNombre: " +product.name + "\nCantidad: " + str(product.stock)+ "\nPrecio: " + str(product.price)+ "\nFecha Expiración: " + product.expirationDate + "\nDescripción: " + product.description +"\n")
+        print(tabulate(d, headers=["ID", "NOMBRE", "CANTIDAD", "PRECIO", "FECHA EXPIRACIÓN", "DESCRIPCIÓN"]))
+        print("---------------------------------------------------------------------------------------------\n")
+        
 
     def searchProduct(self):
         """
@@ -311,6 +302,10 @@ class HardwareStore:
             if not existProduct:
                 #se muestra un mensaje de producto no encontrado
                 print("Producto no encontrado.\n")
+                #mostramos los productos existentes
+                print("los productos que existen son: \n")
+                #llamamos a la funcion para listar los productos
+                hardwareStore.listProducts()
         #si se ingresa una opcion incorrecta
         except:
             #se imprime que la opcion ingresada no ha sido correcta
@@ -348,6 +343,29 @@ class Utils:
             sabeObjectsOnfile = guarda texto en el archivo
             loadObjectsFromFile = carga el texto del archivo
     """
+    
+    def validateExistenceOfFile(filename):
+        """
+        Funcion para validar la existencia del archivo de texto
+        Recibe:
+            filename = nombre del archivo de texto
+        Retorna:
+            true si el archivo existe
+            false si el archivo no existe
+        """
+        #uso de try y excepcion para validar la existencia de un archivo
+        try:
+            #abriendo el archivo con el nombre que se envia como parametro y guardandolo en una variable
+            with open(filename) as f_obj:
+                #leemos el archio y lo almacenamos en una variable
+                contents = f_obj.read()
+        #si el archivo no existe
+        except FileNotFoundError:
+            #se muestra un mensaje de que el archivo no existe
+            msg = "El archivo "+ filename + " no existe agrega productos para crearlo."
+            #se imprime el mensaje
+            print(msg)
+
     def saveObjectsOnFile(filename,line):
         """
         Funcion para guardar los objetos en un archivo de texto
@@ -361,11 +379,11 @@ class Utils:
         a = agregación al final del archivo
         r+ = leer y escribir
         """
-        #abirmos el archivo
+        cwd = os.getcwd()
+        filename = cwd + "\\" + filename
         file = open(filename,"a")
-        #escribimos en el archivo el texto enviado
+        print(filename)
         file.write(line)
-        #cerramos el archivo
         file.close()
 
     def loadObjectsFromFile(filename):
@@ -376,13 +394,11 @@ class Utils:
         Retorna:
             lines = lineas con el texto del documento
         """
-        #abrimos el archivo
+        cwd = os.getcwd()
+        filename = cwd +"\\"+ filename
         file = open(filename,"r")
-        #leemos el archivo
         lines = file.readlines()
-        #cerramos el archivo
         file.close()
-        #retornamos las lineas almancenas despues de la lectura
         return lines
 
 def menu():
