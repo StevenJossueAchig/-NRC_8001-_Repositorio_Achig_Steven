@@ -1,8 +1,5 @@
-# -NRC_8001-_Repositorio_Achig_Steven
-Repositorio Achig Steven
-
-# Sistema De Ventas Para Una Ferreteria
-Sitema de ventas para una Ferreteria
+# Laboratorio ejercicios en Python
+Ejercicios en Python
 
 Sistema para el manejo de inventario y venta los precios y cantidad de cada producto son numeros decimales y enteros respectivamente, en el caso de los demas ademas datos son cadenas de caracteres, para el ingreso de texto, cada opción lleva a una funcionalidad diferente que solventa las necesidades de una ferreteria, como la venta de productos, agregación de productos, busqueda de un producto entre otros. El esquema de negocio ha sido tomado de https://www.100plandenegocios.com/plan-de-negocios-de-una-ferreteria#descripcion
 
