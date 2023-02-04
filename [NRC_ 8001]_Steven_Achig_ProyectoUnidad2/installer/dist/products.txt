@@ -1,0 +1,8 @@
+Pintura,40,23.89,25/03/2023,Puntura color blanco marca Pintuco
+Martillo,100,12.80,no aplica,martillo marca Stanley de metal
+Enchufe,100,0.50,no aplica,enchufe de 3 patas marca QBYCemento,15,10.75,30/11/2023,Quintal de cemento Holcim
+Moladora,3,65.75,No aplica,Moladora marca Stanley con discos intercambiables
+Taladro,4,85.99,no aplica,Taladro Stanley con brocas intercambiables
+Compresor de aire,2,150.99,no aplica,
+Maso,10,5.89,no aplica,Maso para valdosa de goma
+Asadon,4,15.99,no aplica,Asadon con palo de madera
