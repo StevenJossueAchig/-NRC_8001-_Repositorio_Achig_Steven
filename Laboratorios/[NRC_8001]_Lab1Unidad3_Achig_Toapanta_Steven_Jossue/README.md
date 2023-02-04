@@ -1,16 +1,16 @@
-# Laboratorio ejercicios en Python
-Ejercicios en Python
+# Laboratorio Desarollo de un agente inteligente
+PEAS y tablas de estado
 
-Sistema para el manejo de inventario y venta los precios y cantidad de cada producto son numeros decimales y enteros respectivamente, en el caso de los demas ademas datos son cadenas de caracteres, para el ingreso de texto, cada opción lleva a una funcionalidad diferente que solventa las necesidades de una ferreteria, como la venta de productos, agregación de productos, busqueda de un producto entre otros. El esquema de negocio ha sido tomado de https://www.100plandenegocios.com/plan-de-negocios-de-una-ferreteria#descripcion
+Sistema que mediante el análisis, la definición de un agente inteligente, su PEAS y su tabla de estados, simula el comportamiento de una via inteligente que será capaz de anlizar diferentes vías dependiendo de eso, está despejará la via e incrementará el costo en 1 o si la via no presenta tráfico entonces no realizara ninguna acción y tampoco subirá el costo, así analizará las demás vías para saber si debe moverse o no a descongestionar las vías, por esa acción de moverse a otra via para descongestionar se aumenta el costo en 1, caso contario no se hace nada y tampoco se aumenta el costo. 
 
 
 ## Requisitos
 
 Se requieren las siguientes bibliotecas:
 
-* [memory_profiler](https://pypi.org/project/memory-profiler/)
+* [os](https://pypi.org/project/memory-profiler/)
 
-* [PyInstaller](https://pyinstaller.org/en/stable/)
+* [time](https://pyinstaller.org/en/stable/)
 
 Si desea usar [@profile](https://pypi.org/project/memory-profiler/), ejecutar el programa desde una terminal, buscando el archivo .py y porterior ejeceutar el comando [python -m memory_profiler product.py](https://pypi.org/project/memory-profiler/), posterior haga uso del programa al momento de finalizar el programa automaticamente se capturara la complejidad de espacio de cada una de las funciones a las que se les ha agregado [@profile](https://pypi.org/project/memory-profiler/).
 
