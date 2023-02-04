@@ -8,59 +8,54 @@ Sistema que mediante el análisis, la definición de un agente inteligente, su P
 
 Se requieren las siguientes bibliotecas:
 
-* [os](https://pypi.org/project/memory-profiler/)
+* [os](https://docs.python.org/es/3.10/library/os.html)
 
-* [time](https://pyinstaller.org/en/stable/)
+* [time](https://docs.python.org/es/3.10/library/time.html?highlight=time#module-time)
 
-Si desea usar [@profile](https://pypi.org/project/memory-profiler/), ejecutar el programa desde una terminal, buscando el archivo .py y porterior ejeceutar el comando [python -m memory_profiler product.py](https://pypi.org/project/memory-profiler/), posterior haga uso del programa al momento de finalizar el programa automaticamente se capturara la complejidad de espacio de cada una de las funciones a las que se les ha agregado [@profile](https://pypi.org/project/memory-profiler/).
+Simplemente se importan las librerias ya que vienen por defecto instaladas en Python, realizar un import y el nombre de las bibliotecas.
 
 ## Uso
 
 ```
-usage: product.py [option] [datos]
+import os
+import time
 
-C:\Users\legio\OneDrive\Escritorio\Sistema_De_Ventas_Ferretieria\code>
-C:\Users\legio\OneDrive\Escritorio\Sistema_De_Ventas_Ferretieria\code>python -m memory_profiler product.py
-
-Sistema de ventas Ferreteria: Manejo de un inventario y el proceso para ventas de una ferreteria.
+# Se imprime un mensaje de error.
+print("\nEl estado no es correcto, Por favor intente de nuevo\n")
+#se espera un segundo para que el usuario pueda leer el mensaje.
+time.sleep(0.1)
+#se limpia la pantalla.
+os.system ("cls")
+#se vuelve a imprimir el menu de opciones.
+sigue=True
 
 Arguments:
-  -datos   datos de un producto.
+  no tiene
 ```
 
 ### Formato de los datos de entrada
 
-**Nombre:** El nombre del producto solo debe hacer referencia al producto, no más especificaciones eso se ingresará en la descripción del producto.
+**Ubicación:** El nombre de la via en la que se encuentra el usuario al inicio del programa **Chilibulo, Colonche, Carapungo, Pelileo**.
 
-**Fecha de caducidad:** La manera de ingresar la fecha será en el formato: **DD-MM-AA**. Examples: **24-04-2023**, **19-09-2023**
-
-**Precio:** El precio debe ser ingresado en un formato decimal para que el precio pueda ser correctamente agregado caso contrario no se lo permitirá Ejemplos: **12.30, 56.89, 12.00**
-
-**Cantidad:** La cantidad debe ser ingresada en el formato de un número entero, caso contrario no se lo permitirá Ejemplos: **25, 30, 100**
-
-**Descripción:** En la descripción debe ser ingresada caracteristicas como marca, tamaño, color, entre otros aspectos relevantes para el ingreso del producto. Ejemplos: **Pintura negra Pintuco, Martillo de goma para valdosa, Destornillador punta estrella.**
-
-En caso de usar [@profile](https://pypi.org/project/memory-profiler/) agregar en cada función encima de donde se define, para poder ejecutar el comando python -m memory_profiler product.py, caso contrario no funcionará.
-
+**Estado:** Estado de la vía en la que se encuentra, congestionada o no **0 o 1**
 
 ## Ejemplo
 
 ```
-@profile
-    def listEarns(self):
-        """
-        Funcion para listar las ganancias
-        Recibe:
-            self = clase producto, un objeto
-        Retorna:
-            no retorna
-        """
-        #se imprime las ganancias totales y se redondea las ganancias a dos decimales
-        print("Ganancias totales: $"+str(round(self.earns,2))+"\n")
-```
-
-```
-Pintura,40,23.89,25/03/2023,Puntura color blanco marca Pintuco
+# Se imprime el menu de opciones.
+print("Vías disponibles: Chilibulo, Colonche, Pelileo, Carapungo")
+#se imprime la opcion de salir
+print("Si desea salir del pograma ingrese en cualquier momento la palabra 'salir'\n")
+# Se pide la ubicacion de la via inteligente.
+ubicacionSinFormato = input("\nPor favor ingrese en que via se encuentra: ")
+# Se cambia la ubicacion a mayusculas y se eliminan los espacios en blanco.
+ubicacion = ubicacionSinFormato.upper().strip().replace(" ", "")
+# Si la ubicacion ingresada es igual a la palabra 'SALIR'.
+if ubicacion == 'SALIR':
+    # Se termina el bucle para el ingreso de una ubicación valida.
+    sigue=False
+    #se retorna la ubicacion con el valor de salir para que el programa se cierre.
+    return ubicacion
 ```
 
 ## Licencia
