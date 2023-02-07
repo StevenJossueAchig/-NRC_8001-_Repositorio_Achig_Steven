@@ -2,34 +2,43 @@ import os
 
 def busquedaGenerica(problema, estrategia):
     """
-    Función para ingresar el estado de una vía si esta despejada o congestionada.
+    Función para la búsqueda genérica para buscar la mejor ruta dependiendo de la estrategia ingresada
     Parametros:
-        ubicacion (str): Indica la ubicacion de la via inteligente.
+        problema: estado final o destino al que se requiere llegar
+        estretegia: función para saber según que directriz se busca la mejor ruta
     Retorna:
-        estado (str): Indica el estado de la via inteligente.
+        solución: la solución que ha sido encontrada dependiendo de la estrategia
     """
+    #definimos variables globales un grado y una etiquetas
     global graph,etiquetas
     #inicializaciones del arbol de busqueda
     solucion = []
+    #lista de nodos visitados
     visitados = []
+    #lista de gráfos candidatos
     candidatos = []
+    #variable falla inicilizada como falsa
     falla = False
     #estado inicial del problema 
     nodo_inicial = graph.index(graph[0])
+    #nodo acutal igual al noto incial
     nodo_actual = nodo_inicial
+    #agregamos a la lista solución un cero.
     solucion.append(0)
-    #loop do
+    #mientras 
     while True: 
         #si no hay candidatos para expansion return falla
         #[0] -> ? 
         #[0] -> 1,2 tiene candidatos
         #[0] -> [] no tiene candidatos
         if len(graph[nodo_actual]) == 0:
+            #falla ahora es veradera
             falla = True
             #terminar bucle
             break
         #se elige un nodo hoja de acuerdo al argumento estrategia
         nodo_hoja = estrategia(nodo_actual)
+        #imprimimos el nodo hoja
         print(nodo_hoja)
         #se agrega el nodo escogido a la solución 
         solucion.append(int(etiquetas[nodo_hoja]))
