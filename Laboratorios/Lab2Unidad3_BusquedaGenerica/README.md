@@ -1,46 +1,39 @@
-# Laboratorio ejercicios en Python
-Ejercicios en Python
+# Laboratorio busqueda genérica
+Busqueda genérica (gráfros)
 
-Sistema para el manejo de inventario y venta los precios y cantidad de cada producto son numeros decimales y enteros respectivamente, en el caso de los demas ademas datos son cadenas de caracteres, para el ingreso de texto, cada opción lleva a una funcionalidad diferente que solventa las necesidades de una ferreteria, como la venta de productos, agregación de productos, busqueda de un producto entre otros. El esquema de negocio ha sido tomado de https://www.100plandenegocios.com/plan-de-negocios-de-una-ferreteria#descripcion
+Desarollo de una función que realice una busqueda genérica, basada en un pseudocodigo proporcionado por la docente, el cual se maneja mendiante el uso de un problema y una busqueda, para realizar la busqueda de la mejor ruta dependiendo de la estretegia que se requiera sea estrategia de menor tiempo, menor precio, mayor seguridad, se necesita para estoa tambien definir otras funciones para cada una de las estrategias, en las que se le asignará un costo propio a cada una de las rutas, dependiendo que los nodos a los que este conectada.
 
 
 ## Requisitos
 
 Se requieren las siguientes bibliotecas:
 
-* [memory_profiler](https://pypi.org/project/memory-profiler/)
+* [os](https://docs.python.org/es/3.10/library/os.html)
 
-* [PyInstaller](https://pyinstaller.org/en/stable/)
-
-Si desea usar [@profile](https://pypi.org/project/memory-profiler/), ejecutar el programa desde una terminal, buscando el archivo .py y porterior ejeceutar el comando [python -m memory_profiler product.py](https://pypi.org/project/memory-profiler/), posterior haga uso del programa al momento de finalizar el programa automaticamente se capturara la complejidad de espacio de cada una de las funciones a las que se les ha agregado [@profile](https://pypi.org/project/memory-profiler/).
+Simplemente se importan las librerias ya que vienen por defecto instaladas en Python, realizar un import y el nombre de las bibliotecas.
 
 ## Uso
 
 ```
-usage: product.py [option] [datos]
+import os
+import time
 
-C:\Users\legio\OneDrive\Escritorio\Sistema_De_Ventas_Ferretieria\code>
-C:\Users\legio\OneDrive\Escritorio\Sistema_De_Ventas_Ferretieria\code>python -m memory_profiler product.py
-
-Sistema de ventas Ferreteria: Manejo de un inventario y el proceso para ventas de una ferreteria.
+# Se imprime un mensaje de error.
+print("\nEl estado no es correcto, Por favor intente de nuevo\n")
+#se espera un segundo para que el usuario pueda leer el mensaje.
+time.sleep(0.1)
+#se limpia la pantalla.
+os.system ("cls")
+#se vuelve a imprimir el menu de opciones.
+sigue=True
 
 Arguments:
-  -datos   datos de un producto.
+  no tiene
 ```
 
 ### Formato de los datos de entrada
 
-**Nombre:** El nombre del producto solo debe hacer referencia al producto, no más especificaciones eso se ingresará en la descripción del producto.
-
-**Fecha de caducidad:** La manera de ingresar la fecha será en el formato: **DD-MM-AA**. Examples: **24-04-2023**, **19-09-2023**
-
-**Precio:** El precio debe ser ingresado en un formato decimal para que el precio pueda ser correctamente agregado caso contrario no se lo permitirá Ejemplos: **12.30, 56.89, 12.00**
-
-**Cantidad:** La cantidad debe ser ingresada en el formato de un número entero, caso contrario no se lo permitirá Ejemplos: **25, 30, 100**
-
-**Descripción:** En la descripción debe ser ingresada caracteristicas como marca, tamaño, color, entre otros aspectos relevantes para el ingreso del producto. Ejemplos: **Pintura negra Pintuco, Martillo de goma para valdosa, Destornillador punta estrella.**
-
-En caso de usar [@profile](https://pypi.org/project/memory-profiler/) agregar en cada función encima de donde se define, para poder ejecutar el comando python -m memory_profiler product.py, caso contrario no funcionará.
+**Estrategia:** Se envía una opción para un menu en el cual se escogera cual de las estrategias se usará para realizar la busqueda en este caso solo posee tres estrategias..
 
 
 ## Ejemplo
