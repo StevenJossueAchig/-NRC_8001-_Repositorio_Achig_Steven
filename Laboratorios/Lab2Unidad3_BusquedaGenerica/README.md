@@ -1,7 +1,7 @@
-# Laboratorio busqueda genérica
-Busqueda genérica (gráfros)
+# Laboratorio búsqueda genérica
+Búsqueda genérica (gráfros)
 
-Desarollo de una función que realice una busqueda genérica, basada en un pseudocodigo proporcionado por la docente, el cual se maneja mendiante el uso de un problema y una busqueda, para realizar la busqueda de la mejor ruta dependiendo de la estretegia que se requiera sea estrategia de menor tiempo, menor precio, mayor seguridad, se necesita para estoa tambien definir otras funciones para cada una de las estrategias, en las que se le asignará un costo propio a cada una de las rutas, dependiendo que los nodos a los que este conectada.
+Desarollo de una función que realice una búsqueda genérica, basada en un pseudocodigo proporcionado por la docente, el cual se maneja mendiante el uso de un problema y una búsqueda, para realizar la búsqueda de la mejor ruta dependiendo de la estretegia que se requiera sea estrategia de menor tiempo, menor precio, mayor seguridad, se necesita para estoa tambien definir otras funciones para cada una de las estrategias, en las que se le asignará un costo propio a cada una de las rutas, dependiendo que los nodos a los que este conectada.
 
 
 ## Requisitos
@@ -33,7 +33,7 @@ Arguments:
 
 ### Formato de los datos de entrada
 
-**Estrategia:** Se envía una opción para un menu en el cual se escogera cual de las estrategias se usará para realizar la busqueda en este caso solo posee tres estrategias..
+**Estrategia:** Se envía una opción para un menu en el cual se escogera cual de las estrategias se usará para realizar la búsqueda en este caso solo posee tres estrategias..
 
 
 ## Ejemplo
