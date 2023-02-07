@@ -1,6 +1,13 @@
 import os 
 
 def busquedaGenerica(problema, estrategia):
+    """
+    Función para ingresar el estado de una vía si esta despejada o congestionada.
+    Parametros:
+        ubicacion (str): Indica la ubicacion de la via inteligente.
+    Retorna:
+        estado (str): Indica el estado de la via inteligente.
+    """
     global graph,etiquetas
     #inicializaciones del arbol de busqueda
     solucion = []
@@ -71,6 +78,13 @@ etiquetas = {
 #mayor costo
 
 def estrategia_Seguridad(nodo_actual):
+    """
+    Función para ingresar el estado de una vía si esta despejada o congestionada.
+    Parametros:
+        ubicacion (str): Indica la ubicacion de la via inteligente.
+    Retorna:
+        estado (str): Indica el estado de la via inteligente.
+    """
     global graph,cost
     cost[(0, "Sacar_el_auto_del_garage")] = 8
     cost[(1, "Tomar_la_mariscal_sucre")] = 8
@@ -101,6 +115,13 @@ def estrategia_Seguridad(nodo_actual):
     return mejor_nodo
 
 def estrategia_Precio(nodo_actual):
+    """
+    Función para ingresar el estado de una vía si esta despejada o congestionada.
+    Parametros:
+        ubicacion (str): Indica la ubicacion de la via inteligente.
+    Retorna:
+        estado (str): Indica el estado de la via inteligente.
+    """
     global cost
     cost[(0, "Sacar_el_auto_del_garage")] = 8
     cost[(1, "Tomar_la_mariscal_sucre")] = 6
@@ -130,6 +151,13 @@ def estrategia_Precio(nodo_actual):
     return mejor_nodo
 
 def estrategia_Tiempo(nodo_actual):
+    """
+    Función para ingresar el estado de una vía si esta despejada o congestionada.
+    Parametros:
+        ubicacion (str): Indica la ubicacion de la via inteligente.
+    Retorna:
+        estado (str): Indica el estado de la via inteligente.
+    """
     global cost
     cost[(0, "Sacar_el_auto_del_garage")] = 5
     cost[(1, "Tomar_la_mariscal_sucre")] = 3
