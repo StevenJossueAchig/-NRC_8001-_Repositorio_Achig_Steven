@@ -9,6 +9,8 @@ Desarollo de una función que realice una búsqueda genérica, basada en un pseu
 Se requieren las siguientes bibliotecas:
 
 * [os](https://docs.python.org/es/3.10/library/os.html)
+* [time](https://docs.python.org/es/3.10/library/time.html?highlight=time#module-time)
+
 
 Simplemente se importan las librerias ya que vienen por defecto instaladas en Python, realizar un import y el nombre de las bibliotecas.
 
