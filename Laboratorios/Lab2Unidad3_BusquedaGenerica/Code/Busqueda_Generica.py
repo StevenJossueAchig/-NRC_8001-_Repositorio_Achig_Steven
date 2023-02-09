@@ -1,4 +1,23 @@
 import os 
+import time
+
+"""
+Pseudocódigo:
+
+funcion Busqueda-General(problema, estrategia)
+						returns solución, o falla
+1. inicializar el arbol de búsqueda empelando el estado inicial 
+								del problema
+2. loop do
+3. if no hay candidatos para expansion then return falla
+4. elegir un nodo hoja para expansion de acuerdo a la estrategia
+5. if el nodo contiene un estado objetivo
+6. 	then return la solución
+7. else expandir el nodo y adicionar los nodos resultantes al arbol de búsqueda
+8. end
+
+"""
+
 
 def busquedaGenerica(problema, estrategia):
     """
@@ -78,7 +97,7 @@ etiquetas = {
         "Ir_a_la_parada_del_bus" : "3",
         "Tomar_la_mariscal_sucre" : "4",
         "Tomar_Un_taxi_al_Trabajo_De_Mi_Madre" : "5",
-        "Tomar_Un_Bus_al_Trabajo_De_Mi_Madre" : "6",
+        #"Tomar_Un_Bus_al_Trabajo_De_Mi_Madre" : "6",
         "Tomar_la_avenida_America" : "7",
         "Llegar_al_trabajo_de_mi_madre" : "8"
     }
@@ -88,112 +107,189 @@ etiquetas = {
 
 def estrategia_Seguridad(nodo_actual):
     """
-    Función para ingresar el estado de una vía si esta despejada o congestionada.
+    Función para definir la estragia de mayor seguridad
     Parametros:
-        ubicacion (str): Indica la ubicacion de la via inteligente.
+        nodo actual: es el nodo en el que nos encontremos
     Retorna:
-        estado (str): Indica el estado de la via inteligente.
+        mejor nodo: es el mejor camino que se escojera dependiendo la estraregia 
     """
+    #definimos variables globales para el grafo y el costo
     global graph,cost
+    #definimos los costos de las aristas este es el costo por sacar el auto del garage
     cost[(0, "Sacar_el_auto_del_garage")] = 8
+    #definimos el costo de tomar la mariscal sucre
     cost[(1, "Tomar_la_mariscal_sucre")] = 8
+    #definimos el costo de tomar la avenida america
     cost[(4, "Tomar_la_avenida_America")] = 8
+    #definimos el costo de tomar el bus
     cost[(7, "Llegar_al_trabajo_de_mi_madre")] = 8
+    #definimos el costo de ir a la parada del bus
     cost[(0, "Ir_a_la_parada_del_bus")] = 6
+    #definimos el costo de tomar el bus
     cost[(3, "Tomar_Un_Bus_al_Trabajo_De_Mi_Madre")] = 3
+    #definimos el costo de ir a la parada de taxis
     cost[(6, "Llegar_al_trabajo_de_mi_madre")] = 3
+    #definimos el costo de ir a la parada de taxis
     cost[(0, "Ir_a_la_parada_de_taxis")] = 5
+    #definimos el costo de tomar el taxi
     cost[(2, "Tomar_Un_taxi_al_Trabajo_De_Mi_Madre")] = 5
+    #definimos el costo de llegar al trabajo de mi madre
     cost[(5, "Llegar_al_trabajo_de_mi_madre")] = 5
-    
+    #definimos la variable del mejor nodo como un string vacio
     mejor_nodo = ""
+    #imprimimos el nodo actual en el que nos encontramos
     print("NODO ACTUAL", nodo_actual)
+    #el nodo de partida sera el nodo actual tomado del grafo
     nodo_partida = graph[nodo_actual]
+    #definimos el costo anterior como 0
     costo_anterior = 0
+    #recorremos el nodo de partida
     for nodo_hoja in nodo_partida:
+        #imprimimos el nodo hoja
         print("nodo_hoja",nodo_hoja)
+        #definimos el costo como el costo del nodo actual y el nodo hoja
         costo = cost[(nodo_actual,nodo_hoja)]
+        #imprimimos el costo
         print("COSTO ACTUAL", costo)
+        #Imprimimos como comparamos el costo anterior con el costo del nodo
         print("comp", str(costo_anterior) + "<" + str(costo))
+        #si el costo anterior es menor al costo actual
         if costo_anterior < costo:
+            #imprimimos que entro
             print("entro")
+            #definimos el mejor nodo como el nodo hoja
             mejor_nodo = nodo_hoja
+            #definimos el costo anterior como el costo actual
             costo_anterior = costo
-
+    #imprimimos el mejor nodo
     print("mejor nodo",mejor_nodo)
+    #retornamos el mejor nodo
     return mejor_nodo
 
 def estrategia_Precio(nodo_actual):
     """
-    Función para ingresar el estado de una vía si esta despejada o congestionada.
+    Función para definir la estragia de menor precio
     Parametros:
-        ubicacion (str): Indica la ubicacion de la via inteligente.
+        nodo actual: es el nodo en el que nos encontremos
     Retorna:
-        estado (str): Indica el estado de la via inteligente.
+        mejor nodo: es el mejor camino que se escojera dependiendo la estraregia 
     """
+    #definimos variables globales para el grafo y el costo
     global cost
+    #definimos los costos de las aristas este es el costo por sacar el auto del garage
     cost[(0, "Sacar_el_auto_del_garage")] = 8
+    #definimos el costo de tomar la mariscal sucre
     cost[(1, "Tomar_la_mariscal_sucre")] = 6
+    #definimos el costo de tomar la avenida america
     cost[(4, "Tomar_la_avenida_America")] = 6
+    #definimos el costo de tomar el bus
     cost[(7, "Llegar_al_trabajo_de_mi_madre")] = 6
+    #definimos el costo de ir a la parada del bus
     cost[(0, "Ir_a_la_parada_del_bus")] = 1
+    #definimos el costo de tomar el bus
     cost[(3, "Tomar_Un_Bus_al_Trabajo_De_Mi_Madre")] = 3
+    #definimos el costo de ir a la parada de taxis
     cost[(6, "Llegar_al_trabajo_de_mi_madre")] = 3
+    #definimos el costo de ir a la parada de taxis
     cost[(0, "Ir_a_la_parada_de_taxis")] = 3
+    #definimos el costo de tomar el taxi
     cost[(2, "Tomar_Un_taxi_al_Trabajo_De_Mi_Madre")] = 5
+    #definimos el costo de llegar al trabajo de mi madre
     cost[(5, "Llegar_al_trabajo_de_mi_madre")] = 5
-    
+    #definimos la variable del mejor nodo como un string vacio
     mejor_nodo = ""
+    #imprimimos el nodo actual en el que nos encontramos
     print("NODO ACTUAL", nodo_actual)
+    #el nodo de partida sera el nodo actual tomado del grafo
     nodo_partida = graph[nodo_actual]
+    #definimos el costo anterior como 0
     costo_anterior = 10**8
+    #recorremos el nodo de partida
     for nodo_hoja in nodo_partida:
+        #imprimimos el nodo hoja
         print("nodo_hoja",nodo_hoja)
+        #definimos el costo como el costo del nodo actual y el nodo hoja
         costo = cost[(nodo_actual,nodo_hoja)]
+        #imprimimos el costo
         print("COSTO ACTUAL", costo)
+        #Imprimimos como comparamos el costo anterior con el costo del nodo
         print("comp", str(costo_anterior) + ">" + str(costo))
+        #si el costo anterior es menor al costo actual
         if costo_anterior > costo:
+            #imprimimos que entro
             print("entro")
+            #definimos el mejor nodo como el nodo hoja
             mejor_nodo = nodo_hoja
+            #definimos el costo anterior como el costo actual
             costo_anterior = costo
-
+    #retornamos el mejor nodo
     return mejor_nodo
 
 def estrategia_Tiempo(nodo_actual):
     """
-    Función para ingresar el estado de una vía si esta despejada o congestionada.
+    Función para definir la estragia de menor tiempo
     Parametros:
-        ubicacion (str): Indica la ubicacion de la via inteligente.
+        nodo actual: es el nodo en el que nos encontremos
     Retorna:
-        estado (str): Indica el estado de la via inteligente.
+        mejor nodo: es el mejor camino que se escojera dependiendo la estraregia 
     """
+    #definimos variables globales para el grafo y el costo
     global cost
+    #definimos los costos de las aristas este es el costo por sacar el auto del garage
     cost[(0, "Sacar_el_auto_del_garage")] = 5
+    #definimos el costo de tomar la mariscal sucre
     cost[(1, "Tomar_la_mariscal_sucre")] = 3
+    #definimos el costo de tomar la avenida america
     cost[(4, "Tomar_la_avenida_America")] = 3
+    #definimos el costo de tomar el bus
     cost[(7, "Llegar_al_trabajo_de_mi_madre")] = 3
+    #definimos el costo de ir a la parada del bus
     cost[(0, "Ir_a_la_parada_del_bus")] = 6
+    #definimos el costo de tomar el bus
     cost[(3, "Tomar_Un_Bus_al_Trabajo_De_Mi_Madre")] = 6
+    #definimos el costo de ir a la parada de taxis
     cost[(6, "Llegar_al_trabajo_de_mi_madre")] = 6
+    #definimos el costo de ir a la parada de taxis
     cost[(0, "Ir_a_la_parada_de_taxis")] = 4
+    #definimos el costo de tomar el taxi
     cost[(2, "Tomar_Un_taxi_al_Trabajo_De_Mi_Madre")] = 4
+    #definimos el costo de llegar al trabajo de mi madre
     cost[(5, "Llegar_al_trabajo_de_mi_madre")] = 5
-    
+    #definimos la variable del mejor nodo como un string vacio
     mejor_nodo = ""
+    #imprimimos el nodo actual en el que nos encontramos
     print("NODO ACTUAL", nodo_actual)
+    #el nodo de partida sera el nodo actual tomado del grafo
     nodo_partida = graph[nodo_actual]
+    #definimos el costo anterior como 0
     costo_anterior = 10**8
+    #recorremos el nodo de partida
     for nodo_hoja in nodo_partida:
+        #imprimimos el nodo hoja
         print("nodo_hoja",nodo_hoja)
+        #definimos el costo como el costo del nodo actual y el nodo hoja
         costo = cost[(nodo_actual,nodo_hoja)]
+        #imprimimos el costo
         print("COSTO ACTUAL", costo)
+        #Imprimimos como comparamos el costo anterior con el costo del nodo
         print("comp", str(costo_anterior) + ">" + str(costo))
+        #si el costo anterior es menor al costo actual
         if costo_anterior > costo:
+            #imprimimos que entro
             print("entro")
+            #definimos el mejor nodo como el nodo hoja
             mejor_nodo = nodo_hoja
+            #definimos el costo anterior como el costo actual
             costo_anterior = costo
-
+    #retornamos el mejor nodo
     return mejor_nodo
+
+def menu():
+    print("Menu:")
+    print("1. Menor precio")
+    print("2. Menor tiempo")
+    print("3. Mayor Sguridad")
+    print("4. Salir")
 
 
 # main function
@@ -218,25 +314,99 @@ if __name__ == '__main__':
 
     # cost is a dictionary
     print(graph, cost)
-
+    #imprimel grafo y el costo
     print(graph, "\n\n" ,cost)
 
     # set the goal
     problema = "Llegar_al_trabajo_de_mi_madre"
 
-    # get the route
-    #ruta = busquedaGenerica(problema, estrategia_Seguridad)
-    #ruta = busquedaGenerica(problema, estrategia_Tiempo)
-    ruta = busquedaGenerica(problema, estrategia_Precio)
-    # print the answer
-    #os.system("clear")
-    print("MEJOR RUTA".center(60, "-"))
+    # Inicializa la variable opción con 0
+    opcion = 0
 
-    contador = 1
-    formato = "{numero_paso} : {ruta}"
-    for paso in ruta:
-        for key, value in etiquetas.items():
-            if value == str(paso):
-                print(formato.format(numero_paso = contador, ruta = key))
-        contador += 1
+    # Ejecuta el ciclo mientras la opción sea diferente a 4
+    while opcion != '4':
+        # Llama a la función para imprimir el menú
+        menu()
+        # Lee la opción ingresada por el usuario
+        opcion = input("Ingrese una opción: ")
+        # Verifica si la opción es 1 y muestra un mensaje correspondiente
+        if opcion == '1':
+            # get the route
+            #ruta = busquedaGenerica(problema, estrategia_Seguridad)
+            #ruta = busquedaGenerica(problema, estrategia_Tiempo)
+            ruta = busquedaGenerica(problema, estrategia_Precio)
+            # print the answer
+            #os.system("clear")
+            print("MEJOR RUTA".center(60, "-"))
+            #definimos un contador inicializado en 1
+            contador = 1
+            #definimos un diccionario con las etiquetas
+            formato = "{numero_paso} : {ruta}"
+            #para un paso en la ruta
+            for paso in ruta:
+                #Para una llave con su valor en las etiquetas de los items
+                for key, value in etiquetas.items():
+                    #si el valor es igual al paso
+                    if value == str(paso):
+                        #imprimimos el contador y la llave
+                        print(formato.format(numero_paso = contador, ruta = key))
+                #aumentamos el contador
+                contador += 1
+        # Verifica si la opción es 2 y muestra un mensaje correspondiente
+        elif opcion == '2':
+            # get the route
+            #ruta = busquedaGenerica(problema, estrategia_Seguridad)
+            #ruta = busquedaGenerica(problema, estrategia_Tiempo)
+            ruta = busquedaGenerica(problema, estrategia_Tiempo)
+            # print the answer
+            #os.system("clear")
+            print("MEJOR RUTA".center(60, "-"))
+            #definimos un contador inicializado en 1
+            contador = 1
+            #definimos un diccionario con las etiquetas
+            formato = "{numero_paso} : {ruta}"
+            #para un paso en la ruta
+            for paso in ruta:
+                #Para una llave con su valor en las etiquetas de los items
+                for key, value in etiquetas.items():
+                    #si el valor es igual al paso
+                    if value == str(paso):
+                        #imprimimos el contador y la llave
+                        print(formato.format(numero_paso = contador, ruta = key))
+                #aumentamos el contador
+                contador += 1
+        # Verifica si la opción es 3 y muestra un mensaje correspondiente
+        elif opcion == '3':
+            # get the route
+            #ruta = busquedaGenerica(problema, estrategia_Seguridad)
+            #ruta = busquedaGenerica(problema, estrategia_Tiempo)
+            ruta = busquedaGenerica(problema, estrategia_Seguridad)
+            # print the answer
+            #os.system("clear")
+            print("MEJOR RUTA".center(60, "-"))
+            #definimos un contador inicializado en 1
+            contador = 1
+            #definimos un diccionario con las etiquetas
+            formato = "{numero_paso} : {ruta}"
+            #para un paso en la ruta
+            for paso in ruta:
+                #Para una llave con su valor en las etiquetas de los items
+                for key, value in etiquetas.items():
+                    #si el valor es igual al paso
+                    if value == str(paso):
+                        #imprimimos el contador y la llave
+                        print(formato.format(numero_paso = contador, ruta = key))
+                #aumentamos el contador
+                contador += 1
+        # Verifica si la opción es 4 y muestra un mensaje correspondiente
+        elif opcion == '4':
+            print("Ha seleccionado la opción Salir")
+        # Si la opción es diferente a 1, 2, 3 o 4, muestra un mensaje de error
+        else:
+            print("Opción incorrecta, por favor ingrese una opción válida")
+            #se espera un segundo para que el usuario pueda leer el mensaje.
+            time.sleep(0.1)
+            #se limpia la pantalla.
+            os.system ("cls")
+            #se vuelve a imprimir el menu de opciones.
 
